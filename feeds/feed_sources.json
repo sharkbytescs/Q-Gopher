@@ -1,0 +1,16 @@
+{
+  "quantum_feeds": [
+    {
+      "name": "ScienceDaily – Quantum Computing",
+      "url": "https://www.sciencedaily.com/rss/matter_energy/quantum_computing.xml"
+    },
+    {
+      "name": "MIT News – Quantum Computing",
+      "url": "https://news.mit.edu/rss/topic/quantum-computing"
+    },
+    {
+      "name": "AWS – Quantum",
+      "url": "https://aws.amazon.com/blogs/quantum-computing/feed/"
+    }
+  ]
+}
