@@ -15,6 +15,9 @@ logger.setLevel(logging.INFO)
 # --------------------------
 FEED_CONFIG_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'feeds', 'feed_sources.json'))
 S3_BUCKET = os.environ.get('GOPHER_BUCKET')  # Set this in Lambda config
+if not S3_BUCKET:
+    logger.error("Environment variable GOPHER_BUCKET is not set.")
+    raise EnvironmentError("GOPHER_BUCKET environment variable not defined.")
 s3 = boto3.client('s3')
 
 
