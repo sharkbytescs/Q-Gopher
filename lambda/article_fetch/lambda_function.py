@@ -3,6 +3,8 @@ import logging
 import os
 import feedparser
 import boto3
+import re
+from datetime import datetime
 
 # --------------------------
 # Logging Setup
@@ -87,6 +89,13 @@ def save_to_s3(filename, content):
         logger.error(f"Failed to upload {filename}: {e}")
 
 
+
+def sanitize_filename(name):
+    import re
+    name = name.strip().lower()
+    name = re.sub(r'[^a-zA-Z0-9]+', '_', name)   # Replace 1+ non-alphanumeric with a single underscore
+    return name.strip('_')  # Remove leading/trailing underscores
+
 # --------------------------
 # Lambda Entry Point
 # --------------------------
@@ -106,7 +115,8 @@ def lambda_handler(event, context):
             continue
 
         formatted_text = format_articles(feed['name'], articles)
-        filename = f"{feed['name'].replace(' ', '_').lower()}.txt"
+        timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M")
+        filename = f"{sanitize_filename(feed['name'])}_{timestamp}.txt"
         save_to_s3(filename, formatted_text)
 
     return {
