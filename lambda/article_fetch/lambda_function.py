@@ -13,7 +13,7 @@ logger.setLevel(logging.INFO)
 # --------------------------
 # Constants & S3 Setup
 # --------------------------
-FEED_CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'feeds', 'feed_sources.json')
+FEED_CONFIG_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'feeds', 'feed_sources.json'))
 S3_BUCKET = os.environ.get('GOPHER_BUCKET')  # Set this in Lambda config
 s3 = boto3.client('s3')
 
